@@ -1,9 +1,9 @@
 # 一、概述
 ## 1.1 传统图像压缩算法：
 ### 1.1.1 JPEG
-JPEG [1] 是Joint Photographic Experts Group（联合图像专家小组）的缩写，是第一个国际图像压缩标准。JPEG图像压缩算法能够在提供良好的压缩性能的同时，具有比较好的重建质量，被广泛应用于图像、视频处理领域。
+JPEG [1 and 2] 是Joint Photographic Experts Group（联合图像专家小组）的缩写，是第一个国际图像压缩标准。JPEG图像压缩算法能够在提供良好的压缩性能的同时，具有比较好的重建质量，被广泛应用于图像、视频处理领域。
 JPEG静止图像压缩标准,中端和高端比特速率上的良好的速率畸变特性，但在低比特率范围内，将会出现很明显的方块效应，其质量变得不可接受。
-![JPEG 编解码过程](JPEG.jpg)
+![JPEG 编解码过程](pic/JPEG.jpg)
 以baseline JPEG算法(baseline sequential)压缩24位彩色图像为例,压缩步骤如下：
 (1). 颜色转换
 RGB -> YCbCr
@@ -19,12 +19,20 @@ DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，
 
 (5). 量化
 对于DCT之后的结果，根据以下的标准量化表进行量化。
-![标准亮度量化表](标准亮度量化表.gif)
-![标准色差量化表](标准色差量化表.gif)
+![标准亮度量化表](pic/标准亮度量化表.gif)
+![标准色差量化表](pic/标准色差量化表.gif)
 
 (6). 编码
+编码采用两种机制：
+（1）0值的行程长度编码
+（2）熵编码
+1. Zig-zag ordering
+![Zig-zag(https://www.cnblogs.com/tgycoder/p/4991663.html)](pic/zig-zag.png)
+
+2. 
 
 ### 1.1.2 JPEG2000
 
 # references
 [1] https://en.wikipedia.org/wiki/JPEG
+[2] https://baike.baidu.com/item/JPEG
