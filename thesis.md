@@ -29,10 +29,14 @@ DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，
 1. Zig-zag ordering
 ![Zig-zag(https://www.cnblogs.com/tgycoder/p/4991663.html)](pic/zig-zag.png)
 
-2. 
+2.
 
 ### 1.1.2 JPEG2000
+
+基于学习的方法
+[3]中把通过LSTM等方法循环输出码流的方法 称为层进式编码(Pruduce Progessive Codes)
 
 # references
 [1] https://en.wikipedia.org/wiki/JPEG
 [2] https://baike.baidu.com/item/JPEG
+[3] Learning to inpaint for Image Compression
