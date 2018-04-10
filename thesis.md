@@ -35,11 +35,12 @@ DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，
 
 基于学习的方法
 概述
+随着计算能力的发展，深度学习已经在计算机视觉等领域展现出强大的力量，使得通过对大量自然图片进行学习，获得其中的特征表达成为可能。近几年一些学者已经在这方面做出了非常优秀的成果。包括Google、WaveOne、ETH等。
 基于学习的方法的基本结构来源于autoencoder，这是一种将图像压缩到特征空间然后再还原为原始图像的结构，其基本结构如下图：
 ![autoencoder(https://blog.csdn.net/lwq1026/article/details/78581649)](pic/autoencoder.png)
 JPEG对空间相关性的利用不够充分，为了充分利用空间相关性。基于学习的方法一般利用
 图
-[3]中把通过LSTM等方法循环输出码流的方法 称为层进式编码(Pruduce Progessive Codes),这其中典型的代表有google的两篇文章 [4][5]，部分代码开源在https://github.com/tensorflow/models/tree/master/research/compression
+[3]中把通过LSTM等方法循环输出码流的方法 称为层进式编码(Pruduce Progessive Codes),这其中典型的代表有google的两篇文章 [4],[5],[6]，部分代码开源在https://github.com/tensorflow/models/tree/master/research/compression
 
 1. 数据集准备
 在如今的互联网大数据时代，网络上可以搜集到的图片数据虽然很多，但是原始的无损图像数据非常有限。不过如果从信号恢复的角度来讲，任何格式的图像数据都可以作为无损数据来对网络进行训练。所以很多论文包括谷歌[5]的工作都是直接收集的大量网络图片来制作训练集。
@@ -51,11 +52,13 @@ JPEG对空间相关性的利用不够充分，为了充分利用空间相关性�
 
 我们目前的工作
 后续计划
-由于我们目前全图使用的是统一的压缩比例而没有考虑到图像信息量在不同区域的区别，所以下一步考虑在不同的区域使用不同的量化级别进行压缩，这方面也已经有了一些相关的工作包括google [5] 和 ..
+由于我们目前全图使用的是统一的压缩比例而没有考虑到图像信息量在不同区域的区别，所以下一步考虑在不同的区域使用不同的量化级别进行压缩，这方面也已经有了一些相关的工作包括google [6] 和 港科大[7].
 
 # references
 [1] https://en.wikipedia.org/wiki/JPEG
 [2] https://baike.baidu.com/item/JPEG
 [3] Learning to inpaint for Image Compression
-[4] Toderici, G., Vincent, D., Johnston, N., Hwang, S. J., Minnen, D., Shor, J., & Covell, M. (2017, July). Full resolution image compression with recurrent neural networks. In Computer Vision and Pattern Recognition (CVPR), 2017 IEEE Conference on (pp. 5435-5443). IEEE.
-[5] Johnston, N., Vincent, D., Minnen, D., Covell, M., Singh, S., Chinen, T., ... & Toderici, G. (2017). Improved lossy image compression with priming and spatially adaptive bit rates for recurrent networks. arXiv preprint arXiv:1703.10114.
+[4] Toderici, G., O'Malley, S. M., Hwang, S. J., Vincent, D., Minnen, D., Baluja, S., ... & Sukthankar, R. (2015). Variable rate image compression with recurrent neural networks. arXiv preprint arXiv:1511.06085.
+[5] Toderici, G., Vincent, D., Johnston, N., Hwang, S. J., Minnen, D., Shor, J., & Covell, M. (2017, July). Full resolution image compression with recurrent neural networks. In Computer Vision and Pattern Recognition (CVPR), 2017 IEEE Conference on (pp. 5435-5443). IEEE.
+[6] Johnston, N., Vincent, D., Minnen, D., Covell, M., Singh, S., Chinen, T., ... & Toderici, G. (2017). Improved lossy image compression with priming and spatially adaptive bit rates for recurrent networks. arXiv preprint arXiv:1703.10114.
+[7] Li, M., Zuo, W., Gu, S., Zhao, D., & Zhang, D. (2017). Learning convolutional networks for content-weighted image compression. arXiv preprint arXiv:1703.10553.
