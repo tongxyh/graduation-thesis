@@ -1,6 +1,6 @@
 # 一、概述
 图像压缩
-Metric
+### Metric  
 有损压缩图像质量或失真程度一般用峰值信噪比（PSNR）指标来衡量。虽然峰值信噪比不能完全反映人类视觉效果，但是它仍是一个比较流行的量化指标。
 
 ## 1.1 传统图像压缩算法：
@@ -61,11 +61,11 @@ JPEG对空间相关性的利用不够充分，为了充分利用空间相关性�
 由于我们目前全图使用的是统一的压缩比例而没有考虑到图像信息量在不同区域的区别，所以下一步考虑在不同的区域使用不同的量化级别进行压缩，这方面也已经有了一些相关的工作包括google [6] 和 港科大[7].
 
 # references
-[1] https://en.wikipedia.org/wiki/JPEG
-[2] https://baike.baidu.com/item/JPEG
-[3] Learning to inpaint for Image Compression
-[4] Toderici, G., O'Malley, S. M., Hwang, S. J., Vincent, D., Minnen, D., Baluja, S., ... & Sukthankar, R. (2015). Variable rate image compression with recurrent neural networks. arXiv preprint arXiv:1511.06085.
-[5] Toderici, G., Vincent, D., Johnston, N., Hwang, S. J., Minnen, D., Shor, J., & Covell, M. (2017, July). Full resolution image compression with recurrent neural networks. In Computer Vision and Pattern Recognition (CVPR), 2017 IEEE Conference on (pp. 5435-5443). IEEE.
-[6] Johnston, N., Vincent, D., Minnen, D., Covell, M., Singh, S., Chinen, T., ... & Toderici, G. (2017). Improved lossy image compression with priming and spatially adaptive bit rates for recurrent networks. arXiv preprint arXiv:1703.10114.
-[7] Li, M., Zuo, W., Gu, S., Zhao, D., & Zhang, D. (2017). Learning convolutional networks for content-weighted image compression. arXiv preprint arXiv:1703.10553.
-[8] https://baike.baidu.com/item/JPEG%202000/8097196?fromtitle=jpeg2000&fromid=5452998
+[1] https://en.wikipedia.org/wiki/JPEG  
+[2] https://baike.baidu.com/item/JPEG  
+[3] Learning to inpaint for Image Compression  
+[4] Toderici, G., O'Malley, S. M., Hwang, S. J., Vincent, D., Minnen, D., Baluja, S., ... & Sukthankar, R. (2015). Variable rate image compression with recurrent neural networks. arXiv preprint arXiv:1511.06085.  
+[5] Toderici, G., Vincent, D., Johnston, N., Hwang, S. J., Minnen, D., Shor, J., & Covell, M. (2017, July). Full resolution image compression with recurrent neural networks. In Computer Vision and Pattern Recognition (CVPR), 2017 IEEE Conference on (pp. 5435-5443). IEEE.  
+[6] Johnston, N., Vincent, D., Minnen, D., Covell, M., Singh, S., Chinen, T., ... & Toderici, G. (2017). Improved lossy image compression with priming and spatially adaptive bit rates for recurrent networks. arXiv preprint arXiv:1703.10114.  
+[7] Li, M., Zuo, W., Gu, S., Zhao, D., & Zhang, D. (2017). Learning convolutional networks for content-weighted image compression. arXiv preprint arXiv:1703.10553.  
+[8] https://baike.baidu.com/item/JPEG%202000/8097196?fromtitle=jpeg2000&fromid=5452998  
