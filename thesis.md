@@ -15,7 +15,7 @@ RGB -> YCbCr
 YUV420
 
 (4). DCT变换
-DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，分离出高频和低频信息的处理过程。然后再对图像的高频部分（即图像细节）进行压缩，以达到压缩图像数据的目的。首先将图像划分为多个8*8的矩阵。然后对每一个矩阵作DCT变换。变换后得到一个频率系数矩阵，其中的频率系数都是浮点数。
+DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，分离出高频和低频信息的处理过程。然后再对图像的高频部分（即图像细节）进行压缩，以达到压缩图像数据的目的。首先将图像划分为多个8x8的矩阵。然后对每一个矩阵作DCT变换。变换后得到一个频率系数矩阵，其中的频率系数都是浮点数。
 
 (5). 量化
 对于DCT之后的结果，根据以下的标准量化表进行量化。
@@ -34,9 +34,15 @@ DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，
 ### 1.1.2 JPEG2000
 
 基于学习的方法
-[3]中把通过LSTM等方法循环输出码流的方法 称为层进式编码(Pruduce Progessive Codes)
+基于学习的方法的基本结构来源于autoencoder，这是一种将图像压缩到特征空间然后再还原为原始图像的结构，其基本结构如下图：
+![autoencoder(https://blog.csdn.net/lwq1026/article/details/78581649)](pic/autoencoder.png)
+JPG对空间相关性的利用不够充分，为了充分利用空间相关性。基于学习的方法一般利用
+图
+[3]中把通过LSTM等方法循环输出码流的方法 称为层进式编码(Pruduce Progessive Codes),这其中典型的代表有google的两篇文章 [4][5]，部分代码开源在https://github.com/tensorflow/models/tree/master/research/compression
 
 # references
 [1] https://en.wikipedia.org/wiki/JPEG
 [2] https://baike.baidu.com/item/JPEG
 [3] Learning to inpaint for Image Compression
+[4] Toderici, G., Vincent, D., Johnston, N., Hwang, S. J., Minnen, D., Shor, J., & Covell, M. (2017, July). Full resolution image compression with recurrent neural networks. In Computer Vision and Pattern Recognition (CVPR), 2017 IEEE Conference on (pp. 5435-5443). IEEE.
+[5] Johnston, N., Vincent, D., Minnen, D., Covell, M., Singh, S., Chinen, T., ... & Toderici, G. (2017). Improved lossy image compression with priming and spatially adaptive bit rates for recurrent networks. arXiv preprint arXiv:1703.10114.
