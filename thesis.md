@@ -34,11 +34,20 @@ DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，
 ### 1.1.2 JPEG2000
 
 基于学习的方法
+概述
 基于学习的方法的基本结构来源于autoencoder，这是一种将图像压缩到特征空间然后再还原为原始图像的结构，其基本结构如下图：
 ![autoencoder(https://blog.csdn.net/lwq1026/article/details/78581649)](pic/autoencoder.png)
-JPG对空间相关性的利用不够充分，为了充分利用空间相关性。基于学习的方法一般利用
+JPEG对空间相关性的利用不够充分，为了充分利用空间相关性。基于学习的方法一般利用
 图
 [3]中把通过LSTM等方法循环输出码流的方法 称为层进式编码(Pruduce Progessive Codes),这其中典型的代表有google的两篇文章 [4][5]，部分代码开源在https://github.com/tensorflow/models/tree/master/research/compression
+
+1. 数据集准备
+在如今的互联网大数据时代，网络上可以搜集到的图片数据虽然很多，但是原始的无损图像数据非常有限。不过如果从信号恢复的角度来讲，任何格式的图像数据都可以作为无损数据来对网络进行训练。所以很多论文包括谷歌[5]的工作都是直接收集的大量网络图片来制作训练集。
+2. 网络结构
+
+3. 损失函数设计
+
+4. RDO
 
 # references
 [1] https://en.wikipedia.org/wiki/JPEG
