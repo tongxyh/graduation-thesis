@@ -49,6 +49,10 @@ JPEG对空间相关性的利用不够充分，为了充分利用空间相关性�
 
 4. RDO
 
+我们目前的工作
+后续计划
+由于我们目前全图使用的是统一的压缩比例而没有考虑到图像信息量在不同区域的区别，所以下一步考虑在不同的区域使用不同的量化级别进行压缩，这方面也已经有了一些相关的工作包括google [5] 和 ..
+
 # references
 [1] https://en.wikipedia.org/wiki/JPEG
 [2] https://baike.baidu.com/item/JPEG
