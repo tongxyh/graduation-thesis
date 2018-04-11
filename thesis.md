@@ -11,8 +11,16 @@
 $$ PSNR=10*log10((2^n-1)^2/MSE) $$  
 虽然峰值信噪比不能完全反映人类视觉效果，但是它仍是一个比较流行的量化指标。  
 #### SSIM
-
+[11] SSIM(structural similarity index)，结构相似性，是一种衡量两幅图像相似度的指标。该指标首先由德州大学奥斯丁分校的图像和视频工程实验室(Laboratory for Image and Video Engineering)在 [10] 中被提出。  
+作为结构相似性理论的实现，结构相似度指数从图像组成的角度将结构信息定义为独立于亮度、对比度的，反映场景中物体结构的属性，并将失真建模为亮度、对比度和结构三个不同因素的组合。用均值作为亮度的估计，标准差作为对比度的估计，协方差作为结构相似程度的度量。  
+计算公式如下：  
+$$...$$  
+![ssim_function(https://baike.baidu.com/item/SSIM)](pic/ssim_function.jpg)  
 #### MS-SSIM  
+MS这里是Multi-Scale的缩写，MS-SSIM因此是SSIM的一种变体。(MS-SSIM)[4] is conducted over multiple scales through a process of multiple stages of sub-sampling, reminiscent of multiscale processing in the early vision system. It has been shown to perform equally well or better than SSIM on different subjective image and video databases.[12]  
+计算公式：
+
+$$...$$
 
 
 ## 1.1 传统图像压缩算法：
@@ -91,4 +99,7 @@ JPEG对空间相关性的利用不够充分，为了充分利用空间相关性�
 [6] Johnston, N., Vincent, D., Minnen, D., Covell, M., Singh, S., Chinen, T., ... & Toderici, G. (2017). Improved lossy image compression with priming and spatially adaptive bit rates for recurrent networks. arXiv preprint arXiv:1703.10114.  
 [7] Li, M., Zuo, W., Gu, S., Zhao, D., & Zhang, D. (2017). Learning convolutional networks for content-weighted image compression. arXiv preprint arXiv:1703.10553.  
 [8] https://baike.baidu.com/item/JPEG%202000/8097196?fromtitle=jpeg2000&fromid=5452998  
-[9] https://baike.baidu.com/item/psnr
+[9] https://baike.baidu.com/item/psnr  
+[10] Wang, Z., Bovik, A. C., Sheikh, H. R., & Simoncelli, E. P. (2004). Image quality assessment: from error visibility to structural similarity. IEEE transactions on image processing, 13(4), 600-612.  
+[11] https://en.wikipedia.org/wiki/Structural_similarity
+[12] Wang, Z., Simoncelli, E. P., & Bovik, A. C. (2003, November). Multiscale structural similarity for image quality assessment. In Signals, Systems and Computers, 2004. Conference Record of the Thirty-Seventh Asilomar Conference on (Vol. 2, pp. 1398-1402). Ieee.
