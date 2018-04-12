@@ -78,7 +78,7 @@ JPEG对空间相关性的利用不够充分，为了充分利用空间相关性�
 
 # 三、我们的工作  
 ## 3.1 结构
-![DeepCoder结构图-训练](pic/)  
+![DeepCoder结构图-训练](pic/DeepCoder结构图-训练.png)  
 ![DeepCoder结构图-测试](pic/)
 
 训练
