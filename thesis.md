@@ -17,7 +17,7 @@ $$ PSNR=10*log10((2^n-1)^2/MSE) $$
 $$...$$  
 ![ssim_function(https://baike.baidu.com/item/SSIM)](pic/ssim_function.jpg)  
 #### MS-SSIM  
-MS这里是Multi-Scale的缩写，MS-SSIM因此是SSIM的一种变体。(MS-SSIM)[4] is conducted over multiple scales through a process of multiple stages of sub-sampling, reminiscent of multiscale processing in the early vision system. It has been shown to perform equally well or better than SSIM on different subjective image and video databases.[12]  
+MS-SSIM是对SSIM的一种改进,MS这里是Multi-Scale的缩写。它 [4] 通过多个阶段的下采样，对多个尺度进行计算。许多实验[13,14]表明MS-SSIM对主观质量的度量上达到和SSIM类似甚至更好的效果。[12]
 计算公式：
 
 $$...$$
@@ -39,7 +39,7 @@ RGB -> YCbCr
 由于人眼对Y通道的信息更加敏感，所以常常会对U和V通道的信息进行下采样以减少存储信息量。常见的子采样包括YUV420等
 
 (4). DCT变换  
-DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，分离出高频和低频信息的处理过程。然后再对图像的高频部分（即图像细节）进行压缩，以达到压缩图像数据的目的。首先将图像划分为多个 8x8 的矩阵。然后对每一个矩阵作DCT变换。变换后得到一个频率系数矩阵，此时其中的频率系数都是浮点数。
+DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，分离出高频和低频信息的处理过程，经过DCT变换后，图像的低频信息会往左上角集中。然后再对图像的高频部分（即图像细节）进行压缩，以达到压缩图像数据的目的。首先将图像划分为多个 8x8 的矩阵。然后对每一个矩阵作DCT变换。变换后得到一个频率系数矩阵，此时其中的频率系数都是浮点数。
 
 (5). 量化
 对于DCT之后的结果，根据以下的标准量化表进行量化。  
@@ -101,5 +101,7 @@ JPEG对空间相关性的利用不够充分，为了充分利用空间相关性�
 [8] https://baike.baidu.com/item/JPEG%202000/8097196?fromtitle=jpeg2000&fromid=5452998  
 [9] https://baike.baidu.com/item/psnr  
 [10] Wang, Z., Bovik, A. C., Sheikh, H. R., & Simoncelli, E. P. (2004). Image quality assessment: from error visibility to structural similarity. IEEE transactions on image processing, 13(4), 600-612.  
-[11] https://en.wikipedia.org/wiki/Structural_similarity
-[12] Wang, Z., Simoncelli, E. P., & Bovik, A. C. (2003, November). Multiscale structural similarity for image quality assessment. In Signals, Systems and Computers, 2004. Conference Record of the Thirty-Seventh Asilomar Conference on (Vol. 2, pp. 1398-1402). Ieee.
+[11] https://en.wikipedia.org/wiki/Structural_similarity  
+[12] Wang, Z., Simoncelli, E. P., & Bovik, A. C. (2003, November). Multiscale structural similarity for image quality assessment. In Signals, Systems and Computers, 2004. Conference Record of the Thirty-Seventh Asilomar Conference on (Vol. 2, pp. 1398-1402). Ieee.  
+[13] Søgaard, J., Krasula, L., Shahid, M., Temel, D., Brunnström, K., & Razaak, M. (2016). Applicability of Existing Objective Metrics of Perceptual Quality for Adaptive Video Streaming. Electronic Imaging, 2016(13), 1-7.  
+[14] Dosselmann, R., & Yang, X. D. (2011). A comprehensive assessment of the structural similarity index. Signal, Image and Video Processing, 5(1), 81-91.
