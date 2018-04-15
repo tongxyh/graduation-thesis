@@ -55,7 +55,7 @@ DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，
 （1）0值的行程长度编码
 （2）熵编码
 1. zig-zag ordering  
-<center> <img src="pic/zig-zag.png" width=30% /> </center> (https://www.cnblogs.com/tgycoder/p/4991663.html)
+<div align=center> <img src="pic/zig-zag.png" width=30% /> </div> (https://www.cnblogs.com/tgycoder/p/4991663.html)
 
 2. xxx
 
