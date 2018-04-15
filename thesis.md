@@ -79,7 +79,8 @@ JPEG对空间相关性的利用不够充分，为了充分利用空间相关性�
 # 三、我们的工作  
 ## 3.1 结构
 ![DeepCoder结构图-训练](pic/DeepCoder结构图-训练.png)  
-![DeepCoder结构图-测试](pic/)
+使用训练完成的模型对图像进行编解码： 
+![DeepCoder结构图-测试](pic/DeepCoder结构图-测试.png)
 
 训练
 1. 逐步增加的rloss
