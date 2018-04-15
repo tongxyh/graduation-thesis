@@ -43,7 +43,7 @@ DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，
 
 (5). 量化
 对于DCT之后的结果，根据以下的标准量化表进行量化。  
-<center>![标准亮度量化表](pic/标准亮度量化表.gif)</center>
+<center>![标准亮度量化表](pic/标准亮度量化表.gif){:height="50px" width="200px"}</center>
 <center>![标准色差量化表](pic/标准色差量化表.gif)</center>
 
 (6). 编码  
