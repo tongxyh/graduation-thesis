@@ -29,31 +29,35 @@ JPEG [1 & 2] 是Joint Photographic Experts Group（联合图像专家小组）�
 JPEG静止图像压缩标准,中端和高端比特速率上的良好的速率畸变特性，但在低比特率范围内，将会出现很明显的方块效应，其质量变得不可接受。
 ![JPEG 编解码过程](pic/JPEG.jpg)  
 以baseline JPEG算法(baseline sequential)压缩24位彩色图像为例,压缩步骤如下：  
-(1). 颜色转换  
+#### (1). 颜色转换  
 RGB -> YCbCr
 
-(2). DC电平偏移  
+#### (2). DC电平偏移  
 作用？DCT变换的需求？DC电平偏移的目的是保证输入图像的采样有近似地集中在零附近的动态范围。
 
-(3). 子采样  
+#### (3). 子采样  
 由于人眼对Y通道的信息更加敏感，所以常常会对U和V通道的信息进行下采样以减少存储信息量。常见的子采样包括YUV420等
 
-(4). DCT变换  
+#### (4). DCT变换  
 DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，分离出高频和低频信息的处理过程，经过DCT变换后，图像的低频信息会往左上角集中。然后再对图像的高频部分（即图像细节）进行压缩，以达到压缩图像数据的目的。首先将图像划分为多个 8x8 的矩阵。然后对每一个矩阵作DCT变换。变换后得到一个频率系数矩阵，此时其中的频率系数都是浮点数。
 
-(5). 量化
+#### (5). 量化
 对于DCT之后的结果，根据以下的标准量化表进行量化。  
-<center>![标准亮度量化表](pic/标准亮度量化表.gif){:height="50px" width="200px"}</center>
-<center>![标准色差量化表](pic/标准色差量化表.gif)</center>
 
-(6). 编码  
-编码采用两种机制：
+标准亮度量化表：
+<center> <img src="pic/标准亮度量化表.gif" width=50% /> </center>  
+
+标准色度量化表：
+<center> <img src="pic/标准色差量化表.gif" width=50% /> </center>
+
+#### (6). 编码  
+编码采用两种机制：  
 （1）0值的行程长度编码
 （2）熵编码
-1. Zig-zag ordering  
-![Zig-zag(https://www.cnblogs.com/tgycoder/p/4991663.html)](pic/zig-zag.png)
+1. zig-zag ordering  
+<center> <img src="pic/zig-zag.png" width=30% /> </center> (https://www.cnblogs.com/tgycoder/p/4991663.html)
 
-2.
+2. xxx
 
 ### 1.1.2 JPEG2000
 JPEG 2000 [8] 是基于小波变换的图像压缩标准，由Joint Photographic Experts Group组织创建和维护。JPEG 2000通常被认为是替代JPEG的下一代图像压缩标准。优势：JPEG2000的压缩比更高，而且不会产生原先的基于离散余弦变换的JPEG标准产生的块状模糊瑕疵。JPEG2000同时支持有损压缩和无损压缩。另外，JPEG2000也支持更复杂的渐进式显示和下载。JPEG2000的失真主要是模糊失真。模糊失真产生的主要原因是在编码过程中高频量一定程度的衰减。传统的JPEG压缩也存在模糊失真的问题。就图像整体压缩性能来说，在低压缩比情形下（比如压缩比小于10：1），传统的JPEG图像质量有可能要比JPEG2000要好。JPEG2000在压缩比比较高的情形下，优势才开始明显。整体来说，和传统的JPEG相比，JPEG2000仍然有很大的技术优势，通常压缩性能大概可以提高20%以上。一般在压缩比达到100：1的情形下，采用JPEG压缩的图像已经严重失真并开始难以识别了，但JPEG2000的图像仍可识别。
