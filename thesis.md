@@ -43,8 +43,8 @@ DCT（DiscreteCosineTransform）是将图像信号在频率域上进行变换，
 
 (5). 量化
 对于DCT之后的结果，根据以下的标准量化表进行量化。  
-![标准亮度量化表](pic/标准亮度量化表.gif)
-![标准色差量化表](pic/标准色差量化表.gif)
+<center>![标准亮度量化表](pic/标准亮度量化表.gif)</center>
+<center>![标准色差量化表](pic/标准色差量化表.gif)</center>
 
 (6). 编码  
 编码采用两种机制：
@@ -78,13 +78,21 @@ JPEG对空间相关性的利用不够充分，为了充分利用空间相关性�
 
 # 三、我们的工作  
 ## 3.1 结构
+我们在上文提到的Autoencoder结构的基础上，对整个网络结构进行了如下改进
+#### (1) 加入量化层
+$$ ... $$
+#### (2) 加入 rate loss
+#### (3) 网络中使用中使用resnet和pixel shuffle结构
+
+用于训练的整体网络结构如下：  
 ![DeepCoder结构图-训练](pic/DeepCoder结构图-训练.png)  
-使用训练完成的模型对图像进行编解码： 
+
+使用训练完成的模型对图像进行编解码：  
 ![DeepCoder结构图-测试](pic/DeepCoder结构图-测试.png)
 
 训练
-1. 逐步增加的rloss
-
+1. 逐步增加的rloss  
+At the begining of training \lamda was set to zero to make sure the network won't converge to local optimum. when the network with no rate constraint is convergent after enough epoches of training, we gradually add rate loss into the loss function, and we get a convergence curve as shown in Fig?
 性能
 1. CLIC2018
 
