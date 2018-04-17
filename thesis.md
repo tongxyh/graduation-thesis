@@ -86,7 +86,7 @@ JPEG对空间相关性的利用不够充分，为了充分利用空间相关性�
 #### (1) 加入量化层
 $$ ... $$
 #### (2) 加入 rate loss
-#### (3) 网络中使用中使用resnet和pixel shuffle结构
+#### (3) 网络中使用中使用resnet和pixel shuffle [15] 结构
 
 用于训练的整体网络结构如下：  
 ![DeepCoder结构图-训练](pic/DeepCoder结构图-训练.png)  
@@ -117,4 +117,5 @@ At the begining of training \lamda was set to zero to make sure the network won'
 [11] https://en.wikipedia.org/wiki/Structural_similarity  
 [12] Wang, Z., Simoncelli, E. P., & Bovik, A. C. (2003, November). Multiscale structural similarity for image quality assessment. In Signals, Systems and Computers, 2004. Conference Record of the Thirty-Seventh Asilomar Conference on (Vol. 2, pp. 1398-1402). Ieee.  
 [13] Søgaard, J., Krasula, L., Shahid, M., Temel, D., Brunnström, K., & Razaak, M. (2016). Applicability of Existing Objective Metrics of Perceptual Quality for Adaptive Video Streaming. Electronic Imaging, 2016(13), 1-7.  
-[14] Dosselmann, R., & Yang, X. D. (2011). A comprehensive assessment of the structural similarity index. Signal, Image and Video Processing, 5(1), 81-91.
+[14] Dosselmann, R., & Yang, X. D. (2011). A comprehensive assessment of the structural similarity index. Signal, Image and Video Processing, 5(1), 81-91.  
+[15] Shi, W., Caballero, J., Huszár, F., Totz, J., Aitken, A. P., Bishop, R., ... & Wang, Z. (2016). Real-time single image and video super-resolution using an efficient sub-pixel convolutional neural network. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (pp. 1874-1883).
