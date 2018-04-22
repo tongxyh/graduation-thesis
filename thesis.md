@@ -88,7 +88,15 @@ $$ ... $$
 y = round(Bits * sigmoid(x))
 
 #### (2) 引入 rate loss
-rate loss = 
+对于一个有损压缩任务，我们希望码率尽可能的减小，同时恢复的图像质量尽可能的保持。而这两者时相互冲突的，所以需要对码率和压缩带来的图像质量损失进行权衡，找到权衡下的最优结果 [16]。
+在Autoencoder的结构下，我们要存储的是编码器生成的中间数据，这个数据会在熵编码之后成为实际码流。所以通过计算中间数据的熵，可以近似表达中间数据的集中程度。为了能够让网络在学习的过程中去优化中间数据的熵，存在几个问题需要结局。熵的计算过程需要统计数据的分布，得到的是一个离散的结果，无法求导更新网络参数。
+
+<img src='pic/插值前.bmp'/>
+
+<img src='pic/插值后.bmp'/>
+
+rate loss =
+
 #### (3) 网络中使用中使用resnet和pixel shuffle [15] 结构
 
 用于训练的整体网络结构如下：  
@@ -104,7 +112,7 @@ At the begining of training \lamda was set to zero to make sure the network won'
 1. CLIC2018
 
 # 四、后续计划  
-由于我们目前全图使用的是统一的压缩比例而没有考虑到图像信息量在不同区域的区别，所以下一步考虑在不同的区域使用不同的量化级别进行压缩，这方面也已经有了一些相关的工作包括google [6] 和 港科大[7].
+由于我们目前全图使用的是统一的压缩比例而没有考虑到图像信息量在不同区域的区别，所以下一步考虑在不同的区域使用不同的量化级别进行压缩，这方面也已经有了一些相关的工作包括google [6] 和 港科大 [7].
 
 # 参考文献
 [1] https://en.wikipedia.org/wiki/JPEG  
@@ -122,3 +130,4 @@ At the begining of training \lamda was set to zero to make sure the network won'
 [13] Søgaard, J., Krasula, L., Shahid, M., Temel, D., Brunnström, K., & Razaak, M. (2016). Applicability of Existing Objective Metrics of Perceptual Quality for Adaptive Video Streaming. Electronic Imaging, 2016(13), 1-7.  
 [14] Dosselmann, R., & Yang, X. D. (2011). A comprehensive assessment of the structural similarity index. Signal, Image and Video Processing, 5(1), 81-91.  
 [15] Shi, W., Caballero, J., Huszár, F., Totz, J., Aitken, A. P., Bishop, R., ... & Wang, Z. (2016). Real-time single image and video super-resolution using an efficient sub-pixel convolutional neural network. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (pp. 1874-1883).
+[16] Ballé, Johannes, Valero Laparra, and Eero P. Simoncelli. "End-to-end optimized image compression." arXiv preprint arXiv:1611.01704 (2016).[MLA]
