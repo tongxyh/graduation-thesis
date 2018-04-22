@@ -110,7 +110,7 @@ rate loss = - E[log2Pq]
 
 ## 3.2 训练
 ### 1. 数据集准备  
-数据集包括 kodark[?],clic2018提供的数据集[?]
+数据集包括 [kodak PhotoCD dataset](http://r0k.us/graphics/kodak), 以及 [CVPR 2018 CLIC WORKSHOP](http://www.compression.cc) 提供的数据集。
 
 ### 1. 逐步增加的rloss  
 At the begining of training \lamda was set to zero to make sure the network won't converge to local optimum. when the network with no rate constraint is convergent after enough epoches of training, we gradually add rate loss into the loss function, and we get a convergence curve as shown in Fig?
