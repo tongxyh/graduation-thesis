@@ -95,7 +95,7 @@ y = round(Bits * sigmoid(x))
 图？是将一个整数间隔间分为5段进行采样的数据统计，采样点越多，熵估计的精度就越高：
 <img src='pic/多点采样.bmp'/>
 在获得如上图的离散点数据分布之后，为了获得连续可导的结果，对离散点之间的区域进行插值处理，最终得到如下的分段函数(以线性插值为例，Eero文章 [16] 中使用的是样条插值)：
-<img src='pic/线性插值.bmp'/>
+![线性插值](images/2018/04/线性插值.png)
 
 熵的计算公式
 rate loss = - E[log2Pq]
@@ -108,11 +108,16 @@ rate loss = - E[log2Pq]
 使用训练完成的模型对图像进行编解码：  
 ![DeepCoder结构图-测试](pic/DeepCoder结构图-测试.png)
 
-训练
-1. 逐步增加的rloss  
+## 3.2 训练
+### 1. 数据集准备  
+数据集包括 kodark[?],clic2018提供的数据集[?]
+
+### 1. 逐步增加的rloss  
 At the begining of training \lamda was set to zero to make sure the network won't converge to local optimum. when the network with no rate constraint is convergent after enough epoches of training, we gradually add rate loss into the loss function, and we get a convergence curve as shown in Fig?
-性能
-1. CLIC2018
+
+## 实验与结果分析
+
+### 2. CLIC2018
 
 # 四、后续计划  
 由于我们目前全图使用的是统一的压缩比例而没有考虑到图像信息量在不同区域的区别，所以下一步考虑在不同的区域使用不同的量化级别进行压缩，这方面也已经有了一些相关的工作包括google [6] 和 港科大 [7].
