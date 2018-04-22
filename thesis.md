@@ -76,7 +76,7 @@ JPEG对空间相关性的利用不够充分，为了充分利用空间相关性�
 ### 2. 网络结构
 
 ### 3. 损失函数设计  
-典型的损失函数包括L1、L2，以及VGG Loss，GAN loss
+对于恢复质量的评价，典型的损失函数包括L1、L2，以及VGG Loss，GAN loss
 
 ### 4. Rate Distortion Optimization
 
@@ -89,13 +89,16 @@ y = round(Bits * sigmoid(x))
 
 #### (2) 引入 rate loss
 对于一个有损压缩任务，我们希望码率尽可能的减小，同时恢复的图像质量尽可能的保持。而这两者时相互冲突的，所以需要对码率和压缩带来的图像质量损失进行权衡，找到权衡下的最优结果 [16]。
-在Autoencoder的结构下，我们要存储的是编码器生成的中间数据，这个数据会在熵编码之后成为实际码流。所以通过计算中间数据的熵，可以近似表达中间数据的集中程度。为了能够让网络在学习的过程中去优化中间数据的熵，存在几个问题需要结局。熵的计算过程需要统计数据的分布，得到的是一个离散的结果，无法求导更新网络参数。
+在Autoencoder的结构下，我们要存储的是编码器生成的中间数据，这个数据会在熵编码之后成为实际码流。所以通过计算中间数据的熵，可以近似表达中间数据的集中程度。为了能够让网络在学习的过程中去优化中间数据的熵，存在几个问题需要结局。熵的计算过程需要统计数据的分布，得到的是一个离散的结果，无法求导更新网络参数。  
+图？是中间数据经过量化后的数据分布：
+<img src='pic/整数点采样.bmp'/>
+图？是将一个整数间隔间分为5段进行采样的数据统计，采样点越多，熵估计的精度就越高：
+<img src='pic/多点采样.bmp'/>
+在获得如上图的离散点数据分布之后，为了获得连续可导的结果，对离散点之间的区域进行插值处理，最终得到如下的分段函数(以线性插值为例，Eero文章 [16] 中使用的是样条插值)：
+<img src='pic/线性插值.bmp'/>
 
-<img src='pic/插值前.bmp'/>
-
-<img src='pic/插值后.bmp'/>
-
-rate loss =
+熵的计算公式
+rate loss = - E[log2Pq]
 
 #### (3) 网络中使用中使用resnet和pixel shuffle [15] 结构
 
@@ -129,5 +132,5 @@ At the begining of training \lamda was set to zero to make sure the network won'
 [12] Wang, Z., Simoncelli, E. P., & Bovik, A. C. (2003, November). Multiscale structural similarity for image quality assessment. In Signals, Systems and Computers, 2004. Conference Record of the Thirty-Seventh Asilomar Conference on (Vol. 2, pp. 1398-1402). Ieee.  
 [13] Søgaard, J., Krasula, L., Shahid, M., Temel, D., Brunnström, K., & Razaak, M. (2016). Applicability of Existing Objective Metrics of Perceptual Quality for Adaptive Video Streaming. Electronic Imaging, 2016(13), 1-7.  
 [14] Dosselmann, R., & Yang, X. D. (2011). A comprehensive assessment of the structural similarity index. Signal, Image and Video Processing, 5(1), 81-91.  
-[15] Shi, W., Caballero, J., Huszár, F., Totz, J., Aitken, A. P., Bishop, R., ... & Wang, Z. (2016). Real-time single image and video super-resolution using an efficient sub-pixel convolutional neural network. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (pp. 1874-1883).
+[15] Shi, W., Caballero, J., Huszár, F., Totz, J., Aitken, A. P., Bishop, R., ... & Wang, Z. (2016). Real-time single image and video super-resolution using an efficient sub-pixel convolutional neural network. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (pp. 1874-1883).  
 [16] Ballé, Johannes, Valero Laparra, and Eero P. Simoncelli. "End-to-end optimized image compression." arXiv preprint arXiv:1611.01704 (2016).[MLA]
