@@ -110,10 +110,12 @@ rate loss = - E[log2Pq]
 
 ## 3.2 训练
 ### 1. 数据集准备  
-数据集包括 [kodak PhotoCD dataset](http://r0k.us/graphics/kodak), 以及 [CVPR 2018 CLIC WORKSHOP](http://www.compression.cc) 提供的数据集。
+数据集包括 [kodak PhotoCD dataset](http://r0k.us/graphics/kodak), 以及 [CVPR 2018 CLIC WORKSHOP](http://www.compression.cc) 提供的数据集。将收集的图片裁剪为128x128的块供训练使用。
 
-### 1. 逐步增加的rloss  
-At the begining of training \lamda was set to zero to make sure the network won't converge to local optimum. when the network with no rate constraint is convergent after enough epoches of training, we gradually add rate loss into the loss function, and we get a convergence curve as shown in Fig?
+### 2. 训练细节
+使用Adam Optimizer，初始学习率0.0001。
+对于RD优化，在初始阶段设置rloss为0，在网络充分收敛之后，逐步增加rloss的权重，使中间数据的分布逐渐集中。这样做的意义在于防止网络不能充分学习。
+这样做可以and we get a convergence curve as shown in Fig?
 
 ## 实验与结果分析
 
