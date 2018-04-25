@@ -19,7 +19,7 @@ $$...$$
 #### MS-SSIM  
 MS-SSIM是对SSIM的一种改进,MS这里是Multi-Scale的缩写。它 [4] 通过多个阶段的下采样，对多个尺度进行计算。许多实验[13,14]表明MS-SSIM对主观质量的度量上达到和SSIM类似甚至更好的效果。[12]
 计算公式：
-
+[18]
 $$...$$
 
 
@@ -120,9 +120,14 @@ rate loss = - E[log2Pq]
 对于RD优化，在初始阶段设置rloss为0，待网络充分收敛后，逐步增加rloss的权重，使中间数据的分布逐渐集中。这样做的意义在于防止网络不能充分学习。这样做可以防止网络迅速收敛到熵值很低的局部最优，而无法充分学习到图像分布的特征，(此处应当有对比)
 and we get a convergence curve as shown in Fig?
 
-## 实验与结果分析
+## 3.3 实验与结果分析
+### 1. 性能
 
 ### 2. CLIC2018
+
+### 3. 计算复杂度
+编码复杂度  
+解码复杂度  
 
 # 四、后续计划  
 ## 4.1 Content Adaptive Coding
@@ -158,4 +163,5 @@ and we get a convergence curve as shown in Fig?
 [14] Dosselmann, R., & Yang, X. D. (2011). A comprehensive assessment of the structural similarity index. Signal, Image and Video Processing, 5(1), 81-91.  
 [15] Shi, W., Caballero, J., Huszár, F., Totz, J., Aitken, A. P., Bishop, R., ... & Wang, Z. (2016). Real-time single image and video super-resolution using an efficient sub-pixel convolutional neural network. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (pp. 1874-1883).  
 [16] Ballé, Johannes, Valero Laparra, and Eero P. Simoncelli. "End-to-end optimized image compression." arXiv preprint arXiv:1611.01704 (2016).[MLA]  
-[17] Kingma, Diederik P., and Jimmy Ba. "Adam: A method for stochastic optimization." arXiv preprint arXiv:1412.6980 (2014).[MLA]
+[17] Kingma, Diederik P., and Jimmy Ba. "Adam: A method for stochastic optimization." arXiv preprint arXiv:1412.6980 (2014).[MLA]  
+[18] Z. Wang, E.P. Simoncelli, and A.C. Bovik, “Multi-scale structuralsimilarity for image quality assessment,” ACSSC’03, pp. 1398-1402, 2003.
