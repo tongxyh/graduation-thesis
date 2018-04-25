@@ -116,7 +116,7 @@ rate loss = - E[log2Pq]
 数据集包括 [kodak PhotoCD dataset](http://r0k.us/graphics/kodak), 以及 [CVPR 2018 CLIC WORKSHOP](http://www.compression.cc) 提供的数据集。将收集的图片裁剪为128x128的块供训练使用。
 
 ### 2. 训练细节
-使用Adam Optimizer [?]，初始学习率设置为0.0001。
+使用Adam Optimizer [17]，初始学习率设置为0.0001。
 对于RD优化，在初始阶段设置rloss为0，待网络充分收敛后，逐步增加rloss的权重，使中间数据的分布逐渐集中。这样做的意义在于防止网络不能充分学习。这样做可以防止网络迅速收敛到熵值很低的局部最优，而无法充分学习到图像分布的特征，(此处应当有对比)
 and we get a convergence curve as shown in Fig?
 
@@ -157,4 +157,5 @@ and we get a convergence curve as shown in Fig?
 [13] Søgaard, J., Krasula, L., Shahid, M., Temel, D., Brunnström, K., & Razaak, M. (2016). Applicability of Existing Objective Metrics of Perceptual Quality for Adaptive Video Streaming. Electronic Imaging, 2016(13), 1-7.  
 [14] Dosselmann, R., & Yang, X. D. (2011). A comprehensive assessment of the structural similarity index. Signal, Image and Video Processing, 5(1), 81-91.  
 [15] Shi, W., Caballero, J., Huszár, F., Totz, J., Aitken, A. P., Bishop, R., ... & Wang, Z. (2016). Real-time single image and video super-resolution using an efficient sub-pixel convolutional neural network. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (pp. 1874-1883).  
-[16] Ballé, Johannes, Valero Laparra, and Eero P. Simoncelli. "End-to-end optimized image compression." arXiv preprint arXiv:1611.01704 (2016).[MLA]
+[16] Ballé, Johannes, Valero Laparra, and Eero P. Simoncelli. "End-to-end optimized image compression." arXiv preprint arXiv:1611.01704 (2016).[MLA]  
+[17] Kingma, Diederik P., and Jimmy Ba. "Adam: A method for stochastic optimization." arXiv preprint arXiv:1412.6980 (2014).[MLA]
