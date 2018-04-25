@@ -116,7 +116,7 @@ rate loss = - E[log2Pq]
 数据集包括 [kodak PhotoCD dataset](http://r0k.us/graphics/kodak), 以及 [CVPR 2018 CLIC WORKSHOP](http://www.compression.cc) 提供的数据集。将收集的图片裁剪为128x128的块供训练使用。
 
 ### 2. 训练细节
-使用Adam Optimizer，初始学习率设置为0.0001。
+使用Adam Optimizer [?]，初始学习率设置为0.0001。
 对于RD优化，在初始阶段设置rloss为0，待网络充分收敛后，逐步增加rloss的权重，使中间数据的分布逐渐集中。这样做的意义在于防止网络不能充分学习。这样做可以防止网络迅速收敛到熵值很低的局部最优，而无法充分学习到图像分布的特征，(此处应当有对比)
 and we get a convergence curve as shown in Fig?
 
