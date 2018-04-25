@@ -98,7 +98,7 @@ y = round(Bits * sigmoid(x))
 图？是将一个整数间隔间分为5段进行采样的数据统计，采样点越多，熵估计的精度就越高：
 <center> <img src='pic/多点采样.bmp'/> </center>
 在获得如上图的离散点数据分布之后，为了获得连续可导的结果，对离散点之间的区域进行插值处理，最终得到如下的分段函数(以线性插值为例，Eero文章 [16] 中使用的是样条插值)：
-![线性插值](pic/线性插值.bmp)  
+<center> <img src='pic/线性插值.bmp'/> </center>
 
 熵的计算公式
 rate loss = - E[log2Pq]
