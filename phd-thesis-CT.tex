@@ -281,16 +281,17 @@ f({\bf U}_i, {\bf U}_j) = e^{\theta({\bf U}_i)^T\phi({\bf U}_j)}.
 
 \section{可变码率的学习压缩}
 \subsection{JPEG中的可变码率技术}
-传统的图像压缩算法如JPEG~\cite{Acharya2005JPEG}、H.264/AVC 以及HEVC~\cite{Sullivan2013Overview} intra profiles apply 预测、变换和量化系数QP（Quantization Parameters）consecutively. For example,
-JPEG implements DCT (Discrete Cosine Transform) directly to the original image $X$ for transformed coefficients $G = {\sf DCT}(X)$, then applies a quantization matrix $Q$  for quantized data $B$, i.e.,
+传统的图像压缩算法如JPEG~\cite{Acharya2005JPEG}、H.264/AVC 以及HEVC~\cite{Sullivan2013Overview} intra profiles apply 预测、变换和量化系数QP（Quantization Parameters）consecutively. 以JPEG为例，JPEG采用离散余弦变换DCT（Discrete Cosine Transform）directly to the original image $X$ for transformed coefficients $G = {\sf DCT}(X)$, then applies a quantization matrix $Q$  for quantized data $B$, i.e.,
 \begin{equation}
 B(i,j) = {\sf ROUND}\left(\frac{{\sf DCT}(X)(i,j)}{Q(i,j)}\right), 0\leq i,j\leq7.
 \end{equation}
 
+其中，$Q(i,j)$是频率相关的。高频部分会被更粗力度的量化，而低频信号则采用细粒度的量化。初始默认的$Q_d$由IJG (Independent JPEG Group)提供，然后通过$S$作为控制缩放的系数，获得最终的$Q$来调整码率$Q = \frac{50+S*Q_d}{100}$。这种缩放的机制为我们接下来要提出的质量缩放系数提供了灵感。
+
 \subsection{基于缩放系数的可变码率的学习压缩}
 前文中已经提到，码率-失真联合优化的过程可以表示为 $R + \lambda D$，其中 $\lambda$ 是一个用来控制码率和失真的超参数. 为了获得最优的RD（Rate-Distortion）性能，大多数基于学习的方法需要通过设置不同的$\lambda$，重复训练多个独立的模型来匹配不同的码率点, 这样的方法在时间和存储空间维度上来说都非常的低效。目前已经有一些早期的工作 [9, 10, 6, 11, 12] 试图避免为不同码率训练多个模型, 但是这些方法仍然存在复杂度较高或者需要设计特定网络结构的问题。
-首先, 我们想了解一下不同码率下的模型参数之间具有怎样的区别和联系。为了直观的进行对比，我们将不同码率（0.18 bits per pixel (bpp), 0.39 bpp和0.67 bpp）、不同通道（第59、100 和165个通道）的特征图在图\ref{fig:visualize}中进行可视化。 一个有趣的发现是：同一通道、不同码率下的特征图除了整体幅值发生了变化外，其中的纹理和模式表现出非常相似的性质。这一发现引出一种合理的假设：我们可以在不进行完整的重复训练的基础上，通过对由同一编码器输出的特征进行缩放来实现可变码率的输出。因此, 在这篇文章中, 我们提出在原始编解码器中嵌入缩放系数来达到可变码率的输出，与此同时，保持原网络模型的参数不变，以节省模型重复训练时间和多个模型的存储空间。其结构如图\ref{fig:qf}所示。
-
+首先, 我们想了解一下不同码率下的模型参数之间具有怎样的区别和联系。为了直观的进行对比，我们将不同码率（0.18 bits per pixel (bpp), 0.39 bpp和0.67 bpp）、不同通道（第59、100 和165个通道）的特征图在图\ref{fig:visualize}中进行可视化。 一个有趣的发现是：同一通道、不同码率下的特征图除了整体幅值发生了变化外，其中的纹理和模式表现出非常相似的性质。这一发现引出一种合理的假设：同JPEG等传统压缩方法中码率调节的方法类似地，我们可以在不进行完整的重复训练的基础上，通过对由同一编码器输出的特征进行缩放来实现可变码率的输出。因此, 在这篇文章中, 我们提出在原始编解码器中嵌入一组质量调节系数SFs（quality scaling factors）以及他们对应的逆函数ISF（Inverse SF） 来达到可变码率的输出；与此同时，保持原网络模型的参数不变，以节省模型重复训练时间和多个模型的存储空间。其结构如图\ref{fig:qf}所示。
+需要之一的是，对于不同的目标码率，需要分别训练对应的SF系数。
 \begin{figure}[t]
    \centering
    \includegraphics[scale=0.6]{./figs/fmaps_vis.pdf}  
@@ -305,16 +306,28 @@ B(i,j) = {\sf ROUND}\left(\frac{{\sf DCT}(X)(i,j)}{Q(i,j)}\right), 0\leq i,j\leq
 \label{fig:qf}
 \end{figure}
 
-其原理同JPEG等传统压缩方法中码率调节的方法类似， we have devised a set of quality scaling factors (SF), and their corresponding reverse functions into the encoder-decoder pair as shown in Fig.~\ref{fig:qf}. Note that these SF and ISF functions are trained at a variety of bit rates, and used subsequently to control the bitrate with fixed model parameters.
-
 对于任意输入图像$Y$, 由编码器$\bf E$ 生成中间层特征$X = {\bf E}(Y)$。其中特征向量$X$共有$n$个通道，缩放系数SFs $({\sf SF} \in \{a_0,b_0\},\{a_1,b_1\},...,\{a_n,b_n\})$ 对应特征向量中的每一个通道有一组值，用于将原始的$X$缩放和平移为一个量化后更紧致的表达$\hat{\sf B}$。
 对于每一个通道$i$, 我们通过如下公式进行变换：
 \begin{align}
   \hat{\bf B}_i  = {\sf Q}\{ {\bf X}^{new}_i\} & = {\sf Q}\{ {\sf SF}\{{\bf X_i}\}\} = {\sf Q}\{ a_i\cdot{\bf X}_i + b_i\}, \label{eq:sf}\\
   & \hat{\bf X}_i = {\sf ISF}\{\hat{\bf B}_i\} = \frac{\hat{\bf B}_i - b_i}{a_i}.
 \end{align}
-Here $\hat{\sf B}$ is the quantized bits that will be entropy coded. $\hat X$ is re-mapped from $\hat {\sf B}$ for reconstruction using Decoder $\bf D$, i.e., $\hat{Y}={\bf D}({\hat X})$. 
-In our work, simple yet effective $\sf ROUND$ function is used for quantization {\sf Q}, and its quantization stepsize equals to $1$.
+其中$\hat{\sf B}$是量化后待熵编码的码字。 $\hat X$由$\hat {\sf B}$经过逆变换得到，并作为解码器$\bf D$的输入以生成重建图像$\hat{Y}={\bf D}({\hat X})$。
+量化操作{\sf Q}的量化步长保持为$1$，由四舍五入函数$\sf ROUND$实现。
+
+为了能够尽可能的提升熵编码的性能，我们希望能够在对特征进行概率估计的时候尽可能地准确。而在前面的公式中，原始的$X$被公式\eqref{eq:sf}线性地映射为了$\hat{\sf B}$，这就导致原本$X$的概率分布${p_d}(\bf x)$也同样被缩放和偏移了。 因此，为了能够不对熵估计模块重新训练，在进行熵编码时，我们使用的是经过$\sf ISF$之后的$\hat{\bf X}$来建模概率， 并通过同步地调整量化步长来匹配编码$\hat{\bf B}$时的实际步长，具体公式如下：
+\begin{align}
+  p(\hat{\bf B}) = {\prod_i} ({p_d}({\bf B}) *\mathcal{U}(-\frac{1}{2},\frac{1}{2}))(\hat {\bf B}_i) \nonumber \\ \Rightarrow {\prod_i} ({p_d}({\bf x}) *\mathcal{U}(-\frac{1}{2a_i},\frac{1}{2a_i})) (\hat{\bf x}^{new}_i)
+  \label{eq:estimator}
+\end{align}
+
+\begin{figure}[htb]
+      \centering
+      \subcaptionbox{PSNR}{\includegraphics[width=7cm]{./figs/psnr.pdf}\label{fig:psnr_fac}}
+      \subcaptionbox{MS-SSIM}{\includegraphics[width=7cm]{./figs/msssim_full.pdf}\label{fig:msim_qf}}
+      \caption{Averaged Performance on Kodak using RGB images. Our results with SF enabled are derived from a pre-trained high bitrate model with model parameters fixed.  A set of scaling factors are trained for different bitrate budgets.}
+      \label{fig:performance}
+\end{figure}
 
 \section{基于定点化推理的高效神经图像解码}
 \section{神经图像编码的鲁棒性分析}
